@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/MyCss/button.css">
+    <script src="../../../js/jquery.min.js"></script>
+    <script src="../../../js/jquery.easyui.min.js"></script>
+
+    <script src="../../../js/easyui-lang-zh_CN.js" charset="utf-8"></script>
+    <script src="../../../js/jquery.edatagrid.js"></script>
+    <script>
+        function get_level(level){
+            switch(level){
+                case '1':
+                    return "一级";
+                case '2':
+                    return "二级";
+                case '3':
+                    return "三级";
+                case '4':
+                    return "四级";
+                case '5':
+                    return "五级";
+                default:
+                    return "无对应级别";
+            }
+        }
+    </script>
+</head>
+
+<body style="font-size:12px">
+<table cellspacing='5'>
+    <tr>
+        <td>产品名称</td>
+        <td><input id = 's_productname'
+            class = "easyui-combobox" style="width:100px" 
+            data-options = "valueField:'product_name',
+                            textField:'product_name',
+                            url:'get_data_product.php'
+                            "/>
+        </td>
+
+        <td>规格</td>
+        <td><input id = 's_standard' 
+            class = 'easyui-combobox' style="width:100px"
+            data-options = "valueField:'standard',
+                            textField:'standard',
+                            url:'get_standard.php'
+            "/>
+        </td>
+
+        <td>型号</td>
+        <td><input id = 's_typenumber' 
+            class = "easyui-combobox" style="width:100px" 
+            data-options = "valueField:'type_number',
+                            textField:'type_number',
+                            url:'get_type_number.php'
+            "/>
+        </td>
+
+        <td>用途</td>
+        <td><input id = 's_application'
+            class = "easyui-combobox" style="width:100px" 
+            data-options = "valueField:'project',
+                            textField:'project',
+                            url:'get_data_purchase.php'"/>
+        </td>
+
+        <td>供应商</td>
+        <td><input id = 's_supplier'
+            class = "easyui-combobox" style="width:200px" 
+            data-options = "valueField:'company_name',
+                            textField:'company_name',
+                            url:'get_data_supplier.php',
+                            onSelect:function(rec){
+                            //供应商对应产品级表联查
+                            $('#s_productname').combobox('clear');
+                            $('#s_productname').combobox('reload','get_data_product.php?company_name=' + rec.company_name);
+                        }
+                            "/>
+        </td>
+
+        <td>采购/付款审批单号</td>
+        <td><input id='s_approvenumber' class='easyui-textbox' style="width:120px"/></td>
+        <td><a href="#" class="easyui-linkbutton" iconcls="icon-search" onclick="dosearch01()">查询</a></td>
+    </tr>
+</table>
+<table id = "table_add">
+    <tr>
+        <td><input id='add_project' class='easyui-textbox' style="width:100px" /></td>
+        <td><button id = "addBtn" onclick = "doadd_project()">新项目</button></td>
+    </tr>
+</table>
+<div style="width:100%;heigth:100%;background: #eee;">
+    <table id="table_01" style="width:100%;heigth:100%;"
+           toolbar="#toolbar01" pagination="true" idfield="id"
+           rownumbers="true" fitcolumns="false" striped="true"
+           singleselect="false">
+        <thead>
+        <tr id="tr_01">
+            <th field="time" width="100px" data-options="
+                editor:{type:'datebox',options:{
+                }}
+            ">日期</th>
+            <th field="abstract" width="60px" data-options="
+                editor:{type:'combobox',options:{
+                valueField: 'label',
+                textField: 'value',
+                panelHeight: 'auto',
+                data: [     {
+                                label: '采购',
+                                value: '采购'
+                            },{
+                                label: '付款',
+                                value: '付款'
+                            },{
+                                label: '维修',
+                                value: '维修'
+                            },{
+                                label: '询价',
+                                value: '询价'
+                            },{
+                                label: '预算',
+                                value: '预算'
+                            },{
+                                label: '其他',
+                                value: '其他'
+                            }]
+            }}">摘要
+            </th>
+            <th field="project_name" width="100px" data-options="
+                editor:{type:'combobox',options:{
+                valueField: 'project_name',
+                textField: 'project_name',
+                url:'get_data_project.php',
+                panelHeight: 'auto',
+                required:true,
+                comboname:'project_name',
+            }}">项目</th>
+            <th field="project_detail" width="100px" editor="text">项目明细</th>
+            <th field="supplier" width="210px" data-options="
+                editor:{type:'combobox',options:{
+                    valueField: 'company_name',
+                    textField: 'company_name',
+                    editable: true,
+                    panelHeight: 'auto',
+                    url:'get_data_supplier.php',
+                    onSelect:function(rec){
+                        //先点击一次选中，才能修改
+                        var row = $('#table_01').datagrid('getSelected');
+                        var rowIndex = $('#table_01').datagrid('getRowIndex',row);
+                        //供应商对应级别
+                        var thisTarget = $('#table_01').datagrid('getEditor',{
+                            'index':rowIndex,'field':'level'
+                        }).target;
+                        thisTarget.textbox('setValue',get_level(rec.level));
+                        //供应商对应产品级表联查
+                        var target = $('#table_01').datagrid('getEditor',{
+                            index:rowIndex,'field':'product_name'
+                        }).target;
+                        target.combobox('clear');//清除之前的数据
+                        var url = 'get_data_product.php?company_name=' + rec.company_name;
+                        target.combobox('reload',url);
+                    }
+                }
+            }">供应商</th>
+            <th field="level" width="80px" editor="{type:'textbox',options:{readonly:true}}">供应商级别</th>
+            <th field="product_name" width="100px" data-options="
+                editor:{type:'combobox',options:{
+                    valueField: 'product_name',
+                    textField: 'product_name',
+                    editable: true,
+                    panelHeight: 'auto',
+                    url:'get_data_product.php',
+                    onSelect:function(rec){
+                        //先点击一次选中，才能修改
+                        var row = $('#table_01').datagrid('getSelected');
+                        var rowIndex = $('#table_01').datagrid('getRowIndex',row);
+                        //产品对应规格
+                        var thisTarget = $('#table_01').datagrid('getEditor',{
+                            'index':rowIndex,'field':'standard'
+                        }).target;
+                        thisTarget.textbox('setValue',rec.standard);
+                        //产品对应型号
+                        thisTarget = $('#table_01').datagrid('getEditor',{
+                            'index':rowIndex,'field':'type_number'
+                        }).target;
+                        thisTarget.textbox('setValue',rec.type_number);
+                        //产品对应单位
+                        thisTarget = $('#table_01').datagrid('getEditor',{
+                            'index':rowIndex,'field':'unit'
+                        }).target;
+                        thisTarget.textbox('setValue',rec.unit);
+                    }
+                }
+            }">产品名称</th>
+            <th field="standard" width="100px" editor="{type:'textbox',options:{readonly:false}}">规格</th>
+            <th field="type_number" width="100px" editor="{type:'textbox',options:{readonly:false}}">型号</th>
+            <th field="unit" width="100px" editor="{type:'textbox',options:{readonly:false}}">单位</th>
+            <th field="budget_number" width="100px" editor="text">预算数量</th>
+            <th field="purchase_number" width="100px" editor="text">采购数量</th>
+            <th field="purchase_unit_price" width="100px" editor="text">采购单价</th>
+            <th field="purchase_money" width="100px" editor="{type:'textbox',options:{readonly:true}}">采购金额</th>
+            <th field="budget_range" width="100px" editor="{type:'textbox',options:{readonly:true}}">是否预计范围</th>
+            <th field="budget_note" width="200px" editor="text">超出预算备注</th>
+            <th field="Un_purchase_number" width="100px" editor="{type:'textbox',options:{readonly:true}}">未采购数量</th>
+            <th field="approve_number" width="100px" editor="text">采购审批单号</th>
+            <th field="pay_number" width="100px" editor="text">付款审批单号</th>
+            <th field="pay_money" width="100px" editor="text">付款金额</th>
+            <th field="pay_should" width="100px" editor="{type:'textbox',options:{readonly:true}}">应付金额</th>
+            <th field="visa_if" width="90px" data-options="
+                                editor:{type:'combobox',options:{
+                                valueField: 'label',
+                                textField: 'value',
+                                value:'否',
+                                panelHeight: 'auto',
+                                data: [{
+                                                                label: '是',
+                                                                value: '是'
+                                                        },{
+                                                                label: '否',
+                                                                value: '否'
+                                                         }]
+                        }}">是否签证
+            </th>
+            <th field="get_bill_if" width="90px" data-options="
+                                editor:{type:'combobox',options:{
+                               
+                                valueField: 'label',
+                                textField: 'value',
+                                value:'否',
+                                panelHeight: 'auto',
+                                data: [{
+                                                                label: '是',
+                                                                value: '是'
+                                                        },{
+                                                                label: '否',
+                                                                value: '否'
+                                                        }]
+                        }}">是否收费
+            </th>
+
+            <th field="got_bill" width="100px" editor="text">已收金额</th>
+            <th field="receipt_responsible" width="100px" editor="text">收款负责人</th>
+            <th field="invoice_money" width="100px" editor="text">发票金额</th>
+            <th field="note" width="200px" editor="text">备注</th>
+            <th field="last_modifier" width="100px" editor="{type:'textbox',options:{readonly:true}}">最后修改人</th>
+            <th field="timestamp" width="140px" editor="{type:'textbox',options:{readonly:true}}">系统操作时间</th>
+        </tr>
+        </thead>
+        <div id="toolbar01">
+            <a href="#" class="easyui-linkbutton" iconcls="icon-add" plain="true"
+               onclick="javascript: $('#table_01').edatagrid('addRow');">新增</a>
+            <a href="#" class="easyui-linkbutton" iconcls="icon-remove" plain="true"
+               onclick="javascript: $('#table_01').edatagrid('destroyRow');">删除</a>
+            <a href="#" class="easyui-linkbutton" iconcls="icon-save" plain="true"
+               onclick="javascript: $('#table_01').edatagrid('saveRow');">保存</a>
+            <a href="#" class="easyui-linkbutton" iconcls="icon-undo" plain="true"
+               onclick="javascript:
+                        $('#table_01').edatagrid('cancelRow');
+                        $('#table_01').edatagrid('unselectAll');">撤销</a>
+        </div>
+    </table>
+</div>
+<hr/>
+<div>
+    <label>选中供应商应付款金额：</label>
+    <input size="8" id='total_pay_should' disabled="disabled" />
+    <button onclick="get_total_pay()">应付款金额汇总</button>
+    <br/><br/>
+    <label>选中产品未采购数量：</label>
+    <input size="5" id='total_un_purchase' disabled="disabled" />
+    <button onclick="get_total_number()">未采购数量汇总</button>
+</div>
+<hr/>
+<form method="post" action="upload_data10.php" enctype="multipart/form-data"
+      onSubmit="javascript: $.messager.progress();">
+    <h3>导入Excel表：</h3><input type="file" name="file_stu"/>
+    <input type="submit" value="导入"/>
+</form>
+<hr/>
+<form method="post" action="download_data10.php" enctype="multipart/form-data">
+    <h3>导出CSV表：</h3>
+    <input type="submit" value="导出"/>
+</form>
+<hr/>
+<script language="javascript">
+    function delcfm() {
+        if (!confirm("确认要清空吗？")) {
+            window.event.returnValue = false;
+            //document.getE
+        }
+    }
+</script>
+<form method="post" action="wipe_data10.php">
+    <h3>清空数据表：</h3>
+    <input type="submit" value="清空" onClick="delcfm()"/>
+</form>
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        mygrid01();
+    })
+
+    function mygrid01() {
+        $('#table_01').edatagrid({
+            onError: function (index, data) {
+                $.messager.alert('警告', '出错了! <br/>出错位置= ' + index + ' <br/>错误内容= ' + data.isError);
+            },
+
+            destroyMsg: {
+                norecord: {    // 在没有记录选择的时候执行
+                    title: '警告',
+                    msg: '没有选中任何记录。'
+                },
+                confirm: {       // 在选择一行的时候执行
+                    title: '确认',
+                    msg: '确定要删除吗？'
+                }
+            },
+            onBeforeEdit:function(rowIndex){
+                global_row_index = rowIndex;
+            },
+            url: 'get_data10.php',
+            saveUrl: 'save_data10.php',
+            updateUrl: 'update_data10.php',
+            destroyUrl: 'destroy_data10.php'
+        });
+    }
+
+    function doadd_project() {
+        var add_project = $("#add_project").textbox('getText');
+        $.ajax({
+            url: "temp_add_data10.php",
+            type:"POST",
+            data:{
+                "add_project":add_project
+            },
+            dataType:"json"
+        });
+        $("#add_project").textbox('setValue','');
+    }
+
+
+    function dosearch01() {
+        $('#table_01').edatagrid({
+            url: "search_data10.php",
+            queryParams: {
+                s_productname: $("#s_productname").textbox('getText'),
+                s_standard: $("#s_standard").textbox('getText'),
+                s_typenumber: $("#s_typenumber").textbox('getText'),
+                s_application: $("#s_application").textbox('getText'),
+                s_supplier: $("#s_supplier").textbox('getText'),
+                s_approvenumber: $("#s_approvenumber").textbox('getText')
+            }
+        });
+    }
+
+    function get_total_pay(){
+        $.ajax({
+            url:"temp_search_data10.php",
+            type:"GET",
+            dataType:"JSON",
+            success:function (data) {
+                if(data.total_pay_should == -1){
+                    alert("请选择供应商后再汇总！");
+                }else{
+                    $("#total_pay_should").val(data.total_pay_should);
+                }
+
+            }
+        })
+    }
+
+    function get_total_number() {
+        $.ajax({
+            url:"temp_search_data10.php",
+            type:"GET",
+            dataType:"JSON",
+            success:function (data) {
+                if(data.total_un_purchase == -1){
+                    alert("请选择项目、产品及型号和标准后再汇总！");
+                }else{
+                    $("#total_un_purchase").val(data.total_un_purchase);
+                }
+
+            }
+        })
+    }
+</script>
+</html>
