@@ -178,16 +178,6 @@
                         //先点击一次选中，才能修改
                         var row = $('#table_01').datagrid('getSelected');
                         var rowIndex = $('#table_01').datagrid('getRowIndex',row);
-                        //产品对应规格
-                        var thisTarget = $('#table_01').datagrid('getEditor',{
-                            'index':rowIndex,'field':'standard'
-                        }).target;
-                        thisTarget.textbox('setValue',rec.standard);
-                        //产品对应型号
-                        thisTarget = $('#table_01').datagrid('getEditor',{
-                            'index':rowIndex,'field':'type_number'
-                        }).target;
-                        thisTarget.textbox('setValue',rec.type_number);
                         //产品对应单位
                         thisTarget = $('#table_01').datagrid('getEditor',{
                             'index':rowIndex,'field':'unit'
@@ -196,7 +186,25 @@
                     }
                 }
             }">产品名称</th>
-            <th field="standard" width="100px" editor="{type:'textbox',options:{readonly:false}}">规格</th>
+            <th field="standard" width="100px" data-options="
+                editor:{type:'combobox',options:{
+                valueField: 'standard',
+                textField: 'standard',
+                editable: true,
+                panelHeight: 'auto',
+                url:'get_data_standard.php',
+                onSelect:function(rec){
+                    //先点击一次选中，才能修改
+                    var row = $('#table_01').datagrid('getSelected');
+                    var rowIndex = $('#table_01').datagrid('getRowIndex',row);
+                    //规格对应型号
+                    thisTarget = $('#table_01').datagrid('getEditor',{
+                        'index':rowIndex,'field':'type_number'
+                    }).target;
+                    thisTarget.textbox('setValue',rec.type_number);
+                    }
+                }
+            }">规格</th>
             <th field="type_number" width="100px" editor="{type:'textbox',options:{readonly:false}}">型号</th>
             <th field="unit" width="100px" editor="{type:'textbox',options:{readonly:false}}">单位</th>
             <th field="budget_number" width="100px" editor="text">预算数量</th>

@@ -97,20 +97,57 @@ try {
     $row_product = $sth_product->fetch(PDO::FETCH_ASSOC);
     if ($row_product != null) {
         //更新产品相关信息
-        $product_id = $row_product['id'];
-        $sth_product = $dbh->prepare("INSERT into $table_product set
-            company_id = $company_id,
-            product_name =:product_name,
-            standard =:standard,
-            type_number =:type_number,
-            unit =:unit        
+
+        //根据输入的产品和规格判断产品是否存在
+        $sth_judgeProduct = $dbh->prepare("select*from $table_product
+            where company_id =:company_id and
+            product_name =:product_name and
+            standard =:standard
         ");
-        
-        $sth_product->execute(array(
-            ':standard' => $_POST['standard'],
-            ':type_number' => $_POST['type_number'],
-            ':unit' => $_POST['unit']
+        $sth_judgeProduct->execute(array(
+            ':company_id' => $company_id,
+            ':product_name' => $_POST['product_name'],
+            ':standard' => $_POST['standard']
         ));
+        $row_judgeProduct = $sth_judgeProduct->fetch(PDO::FETCH_ASSOC);
+        if ($row_judgeProduct != null){
+            $product_id = $row_product['id'];
+            $sth_product = $dbh->prepare("update $table_product set          
+                standard=:standard,
+                type_number=:type_number,
+                unit=:unit
+                where id = $product_id
+            ");
+            $sth_product->execute(array(
+                ':standard' => $_POST['standard'],
+                ':type_number' => $_POST['type_number'],
+                ':unit' => $_POST['unit']
+            ));
+        } else {
+            $sth_product1 = $dbh->prepare("select*from $table_product
+                order by id desc limit 1
+            ");
+            $sth_product1->execute();
+            $row_product1 = $sth_product1->fetch(PDO::FETCH_ASSOC);
+            $product_id = $row_product1['id'] + 1;
+            $sth_product = $dbh->prepare("INSERT into $table_product set
+                company_id =:company_id,
+                product_name =:product_name,
+                standard =:standard,
+                type_number =:type_number,
+                unit =:unit        
+            ");
+        
+            $sth_product->execute(array(
+                ':company_id' => $company_id,
+                ':product_name' => $_POST['product_name'],
+                ':standard' => $_POST['standard'],
+                ':type_number' => $_POST['type_number'],
+                ':unit' => $_POST['unit']
+            ));
+        }
+
+        
         //插入新的采购数据栏
         $sth = $dbh->prepare("INSERT INTO $table_purchase set
             time=:time, 
