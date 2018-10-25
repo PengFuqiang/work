@@ -12,20 +12,6 @@ try{
     if($company_name != null){
         //根据公司名字查询对应的公司id
         $sth = $dbh->prepare("select*from $table_supplier where
-<?php
-session_start();
-
-$table_supplier = 't_supplier';
-$table_product = 't_product';
-$company_name = $_GET['company_name'];
-
-include '../../conn.php';
-
-
-try{
-    if($company_name != null){
-        //根据公司名字查询对应的公司id
-        $sth = $dbh->prepare("select*from $table_supplier where
             company_name=:company_name limit 1
         ");
         $sth->execute(array(

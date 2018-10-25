@@ -90,9 +90,10 @@
 <table id = "table_add">
     <tr>
         <td><input id='add_project' class='easyui-textbox' style="width:100px" /></td>
-        <td><button id = "addBtn" onclick = "doadd_project()">新项目</button></td>
+        <td><button class="easyui-linkbutton" iconcls="icon-add" id = "addBtn" onclick = "doadd_project()">新增项目</button></td>
     </tr>
 </table>
+<a href="v_supplier.php" class="easyui-linkbutton" iconcls="icon-add" id = "addPurchase">新增采购数据</button></a>
 <div style="width:100%;heigth:100%;background: #eee;">
     <table id="table_01" style="width:100%;heigth:100%;"
            toolbar="#toolbar01" pagination="true" idfield="id"
@@ -192,20 +193,18 @@
                 textField: 'standard',
                 editable: true,
                 panelHeight: 'auto',
-                url:'get_data_standard.php',
-                onSelect:function(rec){
-                    //先点击一次选中，才能修改
-                    var row = $('#table_01').datagrid('getSelected');
-                    var rowIndex = $('#table_01').datagrid('getRowIndex',row);
-                    //规格对应型号
-                    thisTarget = $('#table_01').datagrid('getEditor',{
-                        'index':rowIndex,'field':'type_number'
-                    }).target;
-                    thisTarget.textbox('setValue',rec.type_number);
-                    }
+                url:'get_standard.php',
                 }
             }">规格</th>
-            <th field="type_number" width="100px" editor="{type:'textbox',options:{readonly:false}}">型号</th>
+            <th field="type_number" width="100px" data-options="
+                editor:{type:'combobox',options:{
+                valueField: 'type_number',
+                textField: 'type_number',
+                editable: true,
+                panelHeight: 'auto',
+                url:'get_type_number.php',
+                }
+            }">型号</th>
             <th field="unit" width="100px" editor="{type:'textbox',options:{readonly:false}}">单位</th>
             <th field="budget_number" width="100px" editor="text">预算数量</th>
             <th field="purchase_number" width="100px" editor="text">采购数量</th>
@@ -351,7 +350,6 @@
         });
         $("#add_project").textbox('setValue','');
     }
-
 
     function dosearch01() {
         $('#table_01').edatagrid({
