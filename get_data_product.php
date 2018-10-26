@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-$table_supplier = 't_supplier';
-$table_product = 't_product';
+$table_supplier = 't_supplier_all';
+
 $company_name = $_GET['company_name'];
 
 include '../../conn.php';
@@ -10,21 +10,13 @@ include '../../conn.php';
 
 try{
     if($company_name != null){
-        //根据公司名字查询对应的公司id
-        $sth = $dbh->prepare("select*from $table_supplier where
-            company_name=:company_name limit 1
+        
+        //根据公司查询公司对应的产品
+        $sth = $dbh->prepare("select distinct product_name from $table_supplier where
+            company_name=:company_name
         ");
         $sth->execute(array(
             ':company_name' => $company_name
-        ));
-        $supplier = $sth->fetch(PDO::FETCH_ASSOC);
-        $company_id = $supplier['id'];
-        //根据公司id查询公司对于的产品
-        $sth = $dbh->prepare("select distinct product_name,unit from $table_product where
-            company_id=:company_id
-        ");
-        $sth->execute(array(
-            ':company_id' => $company_id
         ));
         $items = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){
