@@ -19,7 +19,7 @@ try{
     $result['total'] = $row['count(*)'];
 
     $sth = $dbh->prepare("select * from $table_purchase
-      where budget_range = 0 or budget_range = 2 order by timestamp desc limit $offset,$rows"
+      where pass_if != '是' and budget_range = 0 or budget_range = 2 order by timestamp desc limit $offset,$rows"
     );
     $sth->execute();
     $items = array();

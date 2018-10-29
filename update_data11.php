@@ -8,16 +8,24 @@ include '../../conn.php';
 try{
 
     if($pass_if == '否')
-        $pass_if = 2;
-    else if($pass_if == '是')
-        $pass_if = 3;
+        $budget_range = 2;
+    else if($budget_range == '是')
+        $budget_range = 3;
     else
-        $pass_if = 0;
+        $budget_range = 0;
+    
+    $sth_purchase = $dbh->prepare("update $table_purchase set
+      pass_if=:pass_if where id = $id
+    ");
+    $sth_purchase->execute(array(
+        ':pass_if'=>$pass_if
+    ));
+
     $sth_purchase = $dbh->prepare("update $table_purchase set
       budget_range=:budget_range where id = $id
     ");
     $sth_purchase->execute(array(
-        ':budget_range'=>$pass_if
+        ':budget_range'=>$budget_range
     ));
 }catch (PDOException $e){
     $result = array();
