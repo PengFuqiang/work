@@ -9,13 +9,20 @@
 
     <script src="../../../js/easyui-lang-zh_CN.js" charset="utf-8"></script>
     <script src="../../../js/jquery.edatagrid.js"></script>
+    <style>
+        .text1
+        {
+            text-align:right;
+            width:100px;
+        }
+    </style>
 </head>
 
 <body style="font-size:12px">
 <table cellspacing='5'>
     <tr>
         <td>公司名称</td>
-        <td><input id='s_companyname' class='easyui-combobox' style="width:200px"
+        <td><input id='s_companyname' class='easyui-combobox' style="width:150px"
             data-options = "valueField:'company_name',
                             textField:'company_name',
                             url:'get_supplierall_company_name.php',
@@ -27,7 +34,7 @@
                             "/>
         </td>
         <td><a href="#" class="easyui-linkbutton" iconcls="icon-search" onclick="dosearch_company()">查询</a></td>
-        <td>供应产品</td>
+        <td class = "text1" >供应产品</td>
         <td><input id='s_productname' class='easyui-combobox' style="width:100px"
              data-options = "valueField:'product_name',
                             textField:'product_name',
@@ -44,13 +51,13 @@
            singleselect="false">
         <thead>
         <tr>
-            <th field="company_name" width="200px" editor="{type:'textbox',options:{required:true}}">公司名称</th>
-            <th field="address" width="250px" editor="{type:'textbox',options:{required:true}}">地址</th>
-            <th field="linkman" width="60px" editor="text">联系人</th>
+            <th field="company_name" width="150px" editor="{type:'textbox',options:{required:true}}">公司名称</th>
+            <th field="address" width="150px" editor="{type:'textbox',options:{required:true}}">地址</th>
+            <th field="linkman" width="70px" editor="text">联系人</th>
             <th field="link_phone" width="100px" editor="text">联系电话</th>
-            <th field="receiver" width="60px" editor="text">收款人</th>
+            <th field="receiver" width="70px" editor="text">收款人</th>
             <th field="deposit_bank" width="100px" editor="text">开户行</th>
-            <th field="bank_account" width="160px" editor="text">帐号</th>
+            <th field="bank_account" width="150px" editor="text">帐号</th>
             <th field="product_name" width="100px" editor="{type:'textbox',options:{required:true}}">供应产品</th>
             <th field="level" width="100px" data-options="
                 editor:{type:'combobox',options:{
@@ -59,26 +66,27 @@
                 textField: 'value',
                 value:'否',
                 data: [{
-                                label: '一级',
+                                label: '1',
                                 value: '一级'
                             },{
-                                label: '二级',
+                                label: '2',
                                 value: '二级'
                             },{
-                                label: '三级',
+                                label: '3',
                                 value: '三级'
                             },{
-                                label: '四级',
+                                label: '4',
                                 value: '四级'
                             },{
-                                label: '五级',
+                                label: '5',
                                 value: '五级'
                             }]
             }}">供应商级别
             </th>
-            <th field="note" width="120px" editor="text">备注</th>
+            <th field="note" width="100px" editor="text">备注</th>
             <th field="last_modifier" width="80px" editor="{type:'textbox',options:{readonly:true}}">最后修改人</th>
-            <th field="timestamp" width="140px" editor="{type:'textbox',options:{readonly:true}}">系统操作时间</th>
+            <th field="timestamp" width="160px" editor="{type:'textbox',options:{readonly:true}}">系统操作时间</th>
+
         </tr>
         </thead>
         <div id="toolbar01">

@@ -10,15 +10,31 @@
 
     <script src="../../../js/easyui-lang-zh_CN.js" charset="utf-8"></script>
     <script src="../../../js/jquery.edatagrid.js"></script>
+    <style>
+        .text1
+        {
+            text-align:right;
+        }
+        .text2
+        {
+            text-align:right;
+            width:80px;
+        }
+        .text3
+        {
+            text-align:right;
+            width:100px;
+        }
+    </style>
 </head>
 
 <body style="font-size:12px">
 <table cellspacing='5'>
     <tr>
-        <td nowrap="nowrap">日期</td>
+        <td class = "text1" nowrap="nowrap">日期</td>
         <td><input type="date" id="p_time" style="width:100px" /></td>
 
-        <td nowrap="nowrap">摘要</td>
+        <td class = "text1" nowrap="nowrap">摘要</td>
         <td><select id = 'p_abstract'
             class = "easyui-combobox" style="width:100px">
             <option value=""></option>
@@ -31,7 +47,7 @@
             </select>
         </td>
 
-        <td nowrap="nowrap">项目</td>
+        <td class = "text1" nowrap="nowrap">项目</td>
         <td><input id = 'p_project'
             class = "easyui-combobox" style="width:100px" 
             data-options = "valueField:'project',
@@ -40,7 +56,7 @@
                             "/>
         </td>
 
-        <td nowrap="nowrap">项目明细</td>
+        <td class = "text1" nowrap="nowrap">项目明细</td>
         <td><input id = 'p_project_detail'
             class = "easyui-combobox" style="width:100px" 
             data-options = "valueField:'project_detail',
@@ -49,7 +65,7 @@
                             "/>
         </td>
 
-        <td nowrap="nowrap">供应商</td>
+        <td class = "text1" nowrap="nowrap">供应商</td>
         <td><input id = 'p_supplier'
             class = "easyui-combobox" style="width:100px" 
             data-options = "valueField:'company_name',
@@ -65,14 +81,14 @@
                             "/>
         </td>
 
-        <td nowrap="nowrap">供应商级别</td>
+        <td class = "text2" nowrap="nowrap">供应商级别</td>
         <td><input id = 'p_level'
-            class = "easyui-textbox" style="width:100px"/>
+            class = "easyui-textbox" style="width:100px" readonly="readonly" />
         </td>
         </tr>
 
         <tr>
-        <td nowrap="nowrap">产品名称</td>
+        <td class = "text1" nowrap="nowrap">产品名称</td>
         <td><input id = 'p_product_name'
             class = "easyui-combobox" style="width:100px" 
             data-options = "valueField:'product_name',
@@ -92,7 +108,7 @@
                             "/>
         </td>
 
-        <td nowrap="nowrap">规格</td>
+        <td class = "text1" nowrap="nowrap">规格</td>
         <td><input id = 'p_standard'
             class = "easyui-combobox" style="width:100px" 
             data-options = "valueField:'standard',
@@ -110,7 +126,7 @@
                             "/>
         </td>
 
-        <td nowrap="nowrap">单位</td>
+        <td class = "text1" nowrap="nowrap">单位</td>
         <td><input id = 'p_unit'
             class = "easyui-combobox" style="width:100px" 
             data-options = "valueField:'unit',
@@ -119,24 +135,24 @@
                             "/>
         </td>
 
-        <td nowrap="nowrap">预算数量</td>
+        <td class = "text1" nowrap="nowrap">预算数量</td>
         <td><input id = 'p_budget_number'
         class = "easyui-textbox" style="width:100px" />
         </td>
 
-        <td nowrap="nowrap">采购数量</td>
+        <td class = "text1" nowrap="nowrap">采购数量</td>
         <td><input id = 'p_purchase_number'
         class = "easyui-textbox" style="width:100px" />
         </td>
         </tr>
 
         <tr>
-        <td nowrap="nowrap">采购单价</td>
+        <td class = "text1" nowrap="nowrap">采购单价</td>
         <td><input id = 'p_purchase_unit_price'
         class = "easyui-textbox" style="width:100px" />
         </td>
 
-        <td nowrap="nowrap">是否预计范围</td>
+        <td class = "text3" nowrap="nowrap">是否预计范围</td>
         <td><select id = 'p_budget_range'
             class = "easyui-combobox" style="width:100px">
             <option></option>
@@ -145,7 +161,7 @@
             </select>
         </td>
 
-        <td nowrap="nowrap">超出预算备注</td>
+        <td class = "text3" nowrap="nowrap">超出预算备注</td>
         <td><select id = 'p_budget_note'
             class = "easyui-combobox" style="width:100px">
             <option></option>
@@ -154,24 +170,24 @@
             </select>
         </td>
 
-        <td nowrap="nowrap">采购审批单号</td>
+        <td class = "text3" nowrap="nowrap">采购审批单号</td>
         <td><input id = 'p_approve_number'
         class = "easyui-textbox" style="width:100px" />
         </td>
 
-        <td nowrap="nowrap">付款审批单号</td>
+        <td class = "text3" nowrap="nowrap">付款审批单号</td>
         <td><input id = 'p_pay_number'
         class = "easyui-textbox" style="width:100px" />
         </td>
 
-        <td nowrap="nowrap">付款金额</td>
+        <td class = "text1" nowrap="nowrap">付款金额</td>
         <td><input id = 'p_pay_money'
         class = "easyui-textbox" style="width:100px" />
         </td>
         </tr>
 
         <tr>
-        <td nowrap="nowrap">是否签证</td>
+        <td class = "text1" nowrap="nowrap">是否签证</td>
         <td><select id = 'p_visa_if'
             class = "easyui-combobox" style="width:100px">
             <option></option>
@@ -180,7 +196,7 @@
             </select>
         </td>
 
-        <td nowrap="nowrap">是否收费</td>
+        <td class = "text1" nowrap="nowrap">是否收费</td>
         <td><select id = 'p_get_bill_if'
             class = "easyui-combobox" style="width:100px">
             <option></option>
@@ -189,11 +205,126 @@
             </select>
         </td>
 
-        <td nowrap="nowrap">已收金额</td>
+        <td class = "text1" nowrap="nowrap">已收金额</td>
         <td><input id = 'p_got_bill' class='easyui-textbox' style="width:100px" />
         </td>
 
-        <td nowrap="nowrap">收款负责人</td>
+        <td class = "text1" nowrap="nowrap">收款负责人</td>
+        <td><input id = 'p_receipt_responsible'
+            class = "easyui-combobox" style="width:100px" 
+                            $('#p_standard').combobox('reload','get_product_standard.php?product_name=' + rec.product_name);
+                            //产品对应型号
+                            $('#p_type_number').combobox('clear');
+                            $('#p_type_number').combobox('reload','get_product_typenumber.php?product_name=' + rec.product_name);
+                            //产品对应单位
+                            $('#p_unit').combobox('clear');
+                            $('#p_unit').combobox('reload','get_product_unit.php?product_name=' + rec.product_name);
+                        }
+                            "/>
+        </td>
+
+        <td class = "text1" nowrap="nowrap">规格</td>
+        <td><input id = 'p_standard'
+            class = "easyui-combobox" style="width:100px" 
+            data-options = "valueField:'standard',
+                            textField:'standard',
+                            url:'get_purchaseall_standard.php'
+                            "/>
+        </td>
+
+        <td class = "text1" nowrap="nowrap">型号</td>
+        <td><input id = 'p_type_number'
+            class = "easyui-combobox" style="width:100px" 
+            data-options = "valueField:'type_number',
+                            textField:'type_number',
+                            url:'get_purchaseall_type_number.php'
+                            "/>
+        </td>
+
+        <td class = "text1" nowrap="nowrap">单位</td>
+        <td><input id = 'p_unit'
+            class = "easyui-combobox" style="width:100px" 
+            data-options = "valueField:'unit',
+                            textField:'unit',
+                            url:'get_purchaseall_unit.php'
+                            "/>
+        </td>
+
+        <td class = "text1" nowrap="nowrap">预算数量</td>
+        <td><input id = 'p_budget_number'
+        class = "easyui-textbox" style="width:100px" />
+        </td>
+
+        <td class = "text1" nowrap="nowrap">采购数量</td>
+        <td><input id = 'p_purchase_number'
+        class = "easyui-textbox" style="width:100px" />
+        </td>
+        </tr>
+
+        <tr>
+        <td class = "text1" nowrap="nowrap">采购单价</td>
+        <td><input id = 'p_purchase_unit_price'
+        class = "easyui-textbox" style="width:100px" />
+        </td>
+
+        <td class = "text3" nowrap="nowrap">是否预计范围</td>
+        <td><select id = 'p_budget_range'
+            class = "easyui-combobox" style="width:100px">
+            <option></option>
+            <option value="是">是</option>
+            <option value="否">否</option>
+            </select>
+        </td>
+
+        <td class = "text3" nowrap="nowrap">超出预算备注</td>
+        <td><select id = 'p_budget_note'
+            class = "easyui-combobox" style="width:100px">
+            <option></option>
+            <option value="单价超出预算">单价超出预算</option>
+            <option value="单价在预算范围内">单价在预算范围内</option>
+            </select>
+        </td>
+
+        <td class = "text3" nowrap="nowrap">采购审批单号</td>
+        <td><input id = 'p_approve_number'
+        class = "easyui-textbox" style="width:100px" />
+        </td>
+
+        <td class = "text3" nowrap="nowrap">付款审批单号</td>
+        <td><input id = 'p_pay_number'
+        class = "easyui-textbox" style="width:100px" />
+        </td>
+
+        <td class = "text1" nowrap="nowrap">付款金额</td>
+        <td><input id = 'p_pay_money'
+        class = "easyui-textbox" style="width:100px" />
+        </td>
+        </tr>
+
+        <tr>
+        <td class = "text1" nowrap="nowrap">是否签证</td>
+        <td><select id = 'p_visa_if'
+            class = "easyui-combobox" style="width:100px">
+            <option></option>
+            <option value="是">是</option>
+            <option value="否">否</option>
+            </select>
+        </td>
+
+        <td class = "text1" nowrap="nowrap">是否收费</td>
+        <td><select id = 'p_get_bill_if'
+            class = "easyui-combobox" style="width:100px">
+            <option></option>
+            <option value="是">是</option>
+            <option value="否">否</option>
+            </select>
+        </td>
+
+        <td class = "text1" nowrap="nowrap">已收金额</td>
+        <td><input id = 'p_got_bill' class='easyui-textbox' style="width:100px" />
+        </td>
+
+        <td class = "text1" nowrap="nowrap">收款负责人</td>
         <td><input id = 'p_receipt_responsible'
             class = "easyui-combobox" style="width:100px" 
             data-options = "valueField:'receipt_responsible',
@@ -202,27 +333,27 @@
                             "/>
         </td>
 
-        <td nowrap="nowrap">发票金额</td>
+        <td class = "text1" nowrap="nowrap">发票金额</td>
         <td><input id = 'p_invoice_money' class='easyui-textbox' style="width:100px" />
         </td>
 
-        <td nowrap="nowrap">备注</td>
+        <td class = "text1" nowrap="nowrap">备注</td>
         <td><input id = 'p_note' class='easyui-textbox' style="width:100px" />
         </td>
         </tr>
 
         <tr>
-        <td nowrap="nowrap">采购金额</td>
+        <td class = "text1" nowrap="nowrap">采购金额</td>
         <td><input id = 'p_purchase_money'
         class = "easyui-textbox" style="width:100px" readonly="readonly"/>
         </td>
 
-        <td nowrap="nowrap">未采购数量</td>
+        <td class = "text1" nowrap="nowrap">未采购数量</td>
         <td><input id = 'p_Un_purchase_number'
         class = "easyui-textbox" style="width:100px" readonly="readonly"/>
         </td>
 
-        <td nowrap="nowrap">应付金额</td>
+        <td class = "text1" nowrap="nowrap">应付金额</td>
         <td><input id = 'p_pay_should'
         class = "easyui-textbox" style="width:100px" readonly="readonly"/>
         </td>

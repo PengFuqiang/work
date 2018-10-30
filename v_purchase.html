@@ -10,6 +10,23 @@
 
     <script src="../../../js/easyui-lang-zh_CN.js" charset="utf-8"></script>
     <script src="../../../js/jquery.edatagrid.js"></script>
+    <style>
+        .text1
+        {
+            text-align:right;
+            width:80px;
+        }
+        .text2
+        {
+            text-align:right;
+            width:50px;
+        }
+        .text3
+        {
+            text-align:right;
+            width:130px;
+        }
+    </style>
 </head>
 
 <body style="font-size:12px">
@@ -17,7 +34,7 @@
     <tr>
         <td>供应商</td>
         <td><input id = 's_supplier'
-            class = "easyui-combobox" style="width:200px" 
+            class = "easyui-combobox" style="width:100px" 
             data-options = "valueField:'company_name',
                             textField:'company_name',
                             url:'get_supplierall_company_name.php',
@@ -29,9 +46,9 @@
                             "/>
         </td>
 
-        <td>产品名称</td>
+        <td class = "text1">产品名称</td>
         <td><input id = 's_productname'
-            class = "easyui-combobox" style="width:100px" 
+            class = "easyui-combobox" style="width:80px" 
             data-options = "valueField:'product_name',
                             textField:'product_name',
                             url:'get_supplierall_product_name.php',
@@ -46,39 +63,38 @@
                             "/>
         </td>
 
-        <td>规格</td>
+        <td class = "text2">规格</td>
         <td><input id = 's_standard' 
-            class = 'easyui-combobox' style="width:100px"
+            class = 'easyui-combobox' style="width:60px"
             data-options = "valueField:'standard',
                             textField:'standard',
                             url:'get_purchaseall_standard.php'
             "/>
         </td>
 
-        <td>型号</td>
+        <td class = "text2">型号</td>
         <td><input id = 's_typenumber' 
-            class = "easyui-combobox" style="width:100px" 
+            class = "easyui-combobox" style="width:60px" 
             data-options = "valueField:'type_number',
                             textField:'type_number',
                             url:'get_purchaseall_type_number.php'
             "/>
         </td>
 
-        <td>用途</td>
+        <td class = "text2">用途</td>
         <td><input id = 's_application'
-            class = "easyui-combobox" style="width:100px" 
+            class = "easyui-combobox" style="width:80px" 
             data-options = "valueField:'project',
                             textField:'project',
                             url:'get_purchaseall_project.php'
             "/>
         </td>
 
-        <td>采购/付款审批单号</td>
+        <td class = "text3">采购/付款审批单号</td>
         <td><input id='s_approvenumber' class='easyui-textbox' style="width:120px"/></td>
-        <td><a href="#" class="easyui-linkbutton" iconcls="icon-search" onclick="dosearch01()">查询</a></td>
+        <td class = "text1"><a href="#" class="easyui-linkbutton" iconcls="icon-search" onclick="dosearch01()">查询</a></td>
     </tr>
 </table>
-<a href="v_supplier.php" class="easyui-linkbutton" iconcls="icon-add" id = "addPurchase">新增采购数据</button></a>
 <div style="width:100%;heigth:100%;background: #eee;">
     <table id="table_01" style="width:100%;heigth:100%;"
            toolbar="#toolbar01" pagination="true" idfield="id"
@@ -87,38 +103,40 @@
         <thead>
         <tr id="tr_01">
             <th field="time" width="100px" editor="{type:'textbox',options:{readonly:true}}">日期</th>
-            <th field="abstract" width="100px" editor="{type:'textbox',options:{readonly:true}}">摘要</th>
-            <th field="project" width="100px" editor="{type:'textbox',options:{readonly:true}}">项目</th>
-            <th field="project_detail" width="100px" editor="{type:'textbox',options:{readonly:true}}">项目明细</th>
-            <th field="supplier" width="200px" editor="{type:'textbox',options:{readonly:true}}">供应商</th>
-            <th field="level" width="80px" editor="{type:'textbox',options:{readonly:true}}">供应商级别</th>
-            <th field="product_name" width="100px" editor="{type:'textbox',options:{readonly:true}}">产品名称</th>
-            <th field="standard" width="100px" editor="{type:'textbox',options:{readonly:true}}">规格</th>
-            <th field="type_number" width="100px" editor="{type:'textbox',options:{readonly:true}}">型号</th>
-            <th field="unit" width="100px" editor="{type:'textbox',options:{readonly:true}}">单位</th>
-            <th field="budget_number" width="100px" editor="{type:'textbox',options:{readonly:true}}">预算数量</th>
-            <th field="purchase_number" width="100px" editor="{type:'textbox',options:{readonly:true}}">采购数量</th>
-            <th field="purchase_unit_price" width="100px" editor="{type:'textbox',options:{readonly:true}}">采购单价</th>
-            <th field="purchase_money" width="100px" editor="{type:'textbox',options:{readonly:true}}">采购金额</th>
+            <th field="abstract" width="60px" editor="{type:'textbox',options:{readonly:true}}">摘要</th>
+            <th field="project" width="80px" editor="{type:'textbox',options:{readonly:true}}">项目</th>
+            <th field="project_detail" width="80px" editor="{type:'textbox',options:{readonly:true}}">项目明细</th>
+            <th field="supplier" width="120px" editor="{type:'textbox',options:{readonly:true}}">供应商</th>
+            <th field="level" width="90px" editor="{type:'textbox',options:{readonly:true}}">供应商级别</th>
+            <th field="product_name" width="80px" editor="{type:'textbox',options:{readonly:true}}">产品名称</th>
+            <th field="standard" width="60px" editor="{type:'textbox',options:{readonly:true}}">规格</th>
+            <th field="type_number" width="60px" editor="{type:'textbox',options:{readonly:true}}">型号</th>
+            <th field="unit" width="50px" editor="{type:'textbox',options:{readonly:true}}">单位</th>
+            <th field="budget_number" width="80px" editor="{type:'textbox',options:{readonly:true}}">预算数量</th>
+            <th field="purchase_number" width="80px" editor="{type:'textbox',options:{readonly:true}}">采购数量</th>
+            <th field="purchase_unit_price" width="80px" editor="{type:'textbox',options:{readonly:true}}">采购单价</th>
+            <th field="purchase_money" width="80px" editor="{type:'textbox',options:{readonly:true}}">采购金额</th>
             <th field="budget_range" width="120px" editor="{type:'textbox',options:{readonly:true}}">是否预计范围</th>
             <th field="budget_note" width="120px" editor="{type:'textbox',options:{readonly:true}}">超出预算备注</th>
-            <th field="Un_purchase_number" width="100px" editor="{type:'textbox',options:{readonly:true}}">未采购数量</th>
+            <th field="Un_purchase_number" width="90px" editor="{type:'textbox',options:{readonly:true}}">未采购数量</th>
             <th field="approve_number" width="100px" editor="{type:'textbox',options:{readonly:true}}">采购审批单号</th>
             <th field="pay_number" width="100px" editor="{type:'textbox',options:{readonly:true}}">付款审批单号</th>
-            <th field="pay_money" width="100px" editor="{type:'textbox',options:{readonly:true}}">付款金额</th>
-            <th field="pay_should" width="100px" editor="{type:'textbox',options:{readonly:true}}">应付金额</th>
-            <th field="visa_if" width="100px" editor="{type:'textbox',options:{readonly:true}}">是否签证</th>
-            <th field="get_bill_if" width="100px" editor="{type:'textbox',options:{readonly:true}}">是否收费</th>
+            <th field="pay_money" width="80px" editor="{type:'textbox',options:{readonly:true}}">付款金额</th>
+            <th field="pay_should" width="80px" editor="{type:'textbox',options:{readonly:true}}">应付金额</th>
+            <th field="visa_if" width="80px" editor="{type:'textbox',options:{readonly:true}}">是否签证</th>
+            <th field="get_bill_if" width="80px" editor="{type:'textbox',options:{readonly:true}}">是否收费</th>
 
-            <th field="got_bill" width="100px" editor="{type:'textbox',options:{readonly:true}}">已收金额</th>
-            <th field="receipt_responsible" width="100px" editor="{type:'textbox',options:{readonly:true}}">收款负责人</th>
-            <th field="invoice_money" width="100px" editor="{type:'textbox',options:{readonly:true}}">发票金额</th>
-            <th field="note" width="120px" editor="{type:'textbox',options:{readonly:true}}">备注</th>
-            <th field="last_modifier" width="100px" editor="{type:'textbox',options:{readonly:true}}">最后修改人</th>
+            <th field="got_bill" width="80px" editor="{type:'textbox',options:{readonly:true}}">已收金额</th>
+            <th field="receipt_responsible" width="90px" editor="{type:'textbox',options:{readonly:true}}">收款负责人</th>
+            <th field="invoice_money" width="80px" editor="{type:'textbox',options:{readonly:true}}">发票金额</th>
+            <th field="note" width="80px" editor="{type:'textbox',options:{readonly:true}}">备注</th>
+            <th field="last_modifier" width="90px" editor="{type:'textbox',options:{readonly:true}}">最后修改人</th>
             <th field="timestamp" width="160px" editor="{type:'textbox',options:{readonly:true}}">系统操作时间</th>
         </tr>
         </thead>
         <div id="toolbar01">
+            <a href="v_purchase_add.php" class="easyui-linkbutton" iconcls="icon-add" plain="true" id = "addPurchase">新增采购数据</a>
+
             <a href="#" class="easyui-linkbutton" iconcls="icon-remove" plain="true"
                onclick="javascript: $('#table_01').edatagrid('destroyRow');">删除</a>
             <a href="#" class="easyui-linkbutton" iconcls="icon-undo" plain="true"

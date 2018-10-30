@@ -45,7 +45,7 @@ if(!empty($_FILES ['file_stu'] ['name'])){
 
     try{
         $table_supplier = "t_supplier_all";
-        for($k=2;$k<=$highestRow;$k++){
+        for($k = 2; $k <= $highestRow; $k++){
             $company_name = $sheet->getCell("A".$k)->getValue();
             $address = $sheet->getCell("B".$k)->getValue();
             $linkman = $sheet->getCell("C".$k)->getValue();
