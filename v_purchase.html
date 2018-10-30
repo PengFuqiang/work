@@ -10,29 +10,25 @@
 
     <script src="../../../js/easyui-lang-zh_CN.js" charset="utf-8"></script>
     <script src="../../../js/jquery.edatagrid.js"></script>
-    <script>
-        function get_level(level){
-            switch(level){
-                case '1':
-                    return "一级";
-                case '2':
-                    return "二级";
-                case '3':
-                    return "三级";
-                case '4':
-                    return "四级";
-                case '5':
-                    return "五级";
-                default:
-                    return "无对应级别";
-            }
-        }
-    </script>
 </head>
 
 <body style="font-size:12px">
 <table cellspacing='5'>
     <tr>
+        <td>供应商</td>
+        <td><input id = 's_supplier'
+            class = "easyui-combobox" style="width:200px" 
+            data-options = "valueField:'company_name',
+                            textField:'company_name',
+                            url:'get_supplierall_company_name.php',
+                            onSelect:function(rec){
+                            //产品要对应所在的供应商
+                            $('#s_productname').combobox('clear');
+                            $('#s_productname').combobox('reload','get_data_product.php?company_name=' + rec.company_name);
+                        }
+                            "/>
+        </td>
+
         <td>产品名称</td>
         <td><input id = 's_productname'
             class = "easyui-combobox" style="width:100px" 
@@ -67,20 +63,6 @@
                             textField:'project',
                             url:'get_purchaseall_project.php'
             "/>
-        </td>
-
-        <td>供应商</td>
-        <td><input id = 's_supplier'
-            class = "easyui-combobox" style="width:200px" 
-            data-options = "valueField:'company_name',
-                            textField:'company_name',
-                            url:'get_supplierall_company_name.php',
-                            onSelect:function(rec){
-                            //产品要对应所在的供应商
-                            $('#s_productname').combobox('clear');
-                            $('#s_productname').combobox('reload','get_data_product.php?company_name=' + rec.company_name);
-                        }
-                            "/>
         </td>
 
         <td>采购/付款审批单号</td>

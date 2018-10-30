@@ -58,6 +58,9 @@
                             onSelect:function(rec){
                             //供应商对应供应商级别
                             $('#p_level').textbox('setValue',rec.level);
+                            //产品要对应所在的供应商
+                            $('#p_product_name').combobox('clear');
+                            $('#p_product_name').combobox('reload','get_data_product.php?company_name=' + rec.company_name);
                         }
                             "/>
         </td>
