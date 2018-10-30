@@ -26,7 +26,7 @@ try{
 
         array_push($total_purchase, $row);
     }
-
+    $str = "日期,摘要,项目,项目明细,供应商,供应商级别,产品名称,规格,型号,单位,预算数量,采购数量,采购单价,采购金额,是否预计范围,超出预算备注,未采购数量,采购审批单号,付款审批单号,付款金额,应付金额,是否签证,是否收费,已收金额,收款负责人,发票金额,备注\n";
     $str = transferEncode($str);
     for($i = 0;$i < count($total_purchase);$i++){
         $time = transferEncode($total_purchase[$i]['time']);

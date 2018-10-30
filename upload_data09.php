@@ -59,7 +59,8 @@ if(!empty($_FILES ['file_stu'] ['name'])){
 
             $sth = $dbh->prepare("select *from $table_supplier where company_name =:company_name and product_name =:product_name limit 1");
             $sth->execute(array(
-                ':company_name' => $company_name
+                ':company_name' => $company_name,
+                ':product_name' => $product_name
             ));
             $query_supplier = $sth->fetch(PDO::FETCH_ASSOC);
 
@@ -90,7 +91,7 @@ if(!empty($_FILES ['file_stu'] ['name'])){
                     ':note' => $note,
                     ':last_modifier' => $_SESSION['userid']
                 ));
-            }else{//在原有的公司上添加产品，更新最后修改人
+            }else{
                 $supplier_id = $query_supplier['id'];
                 $sth = $dbh->prepare("update $table_supplier set
                     address=:address,

@@ -46,7 +46,7 @@ if(!empty($_FILES ['file_stu'] ['name'])){
         $table_supplier = 't_supplier_all';
 
         for($j=2;$j<=$highestRow;$j++){
-            $time = process_excel($sheet->getCell("A".$j)->getValue());
+            $time=date('Y-m-d',PHPExcel_Shared_Date::ExcelToPHP($sheet->getCell("A".$j)->getValue()));
             $abstract = process_excel($sheet->getCell("B".$j)->getValue());
             $project = process_excel($sheet->getCell("C".$j)->getValue());
             $project_detail = process_excel($sheet->getCell("D".$j)->getValue());

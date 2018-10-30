@@ -34,7 +34,15 @@
             class = "easyui-combobox" style="width:100px" 
             data-options = "valueField:'product_name',
                             textField:'product_name',
-                            url:'get_supplierall_product_name.php'
+                            url:'get_supplierall_product_name.php',
+                            onSelect:function(rec){
+                            //产品对应的规格
+                            $('#s_standard').combobox('clear');
+                            $('#s_standard').combobox('reload','get_product_standard.php?product_name=' + rec.product_name);
+                            //产品对应型号
+                            $('#s_typenumber').combobox('clear');
+                            $('#s_typenumber').combobox('reload','get_product_typenumber.php?product_name=' + rec.product_name);
+                        }
                             "/>
         </td>
 
