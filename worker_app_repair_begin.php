@@ -2,12 +2,17 @@
 $table = 't_app_repair';
 $phone = $_POST['phone'];
 $problem_class = $_POST['problem_class'];
+$worker = $_POST['worker'];
 include '../conn.php';
 
 try{
-        $sth = $dbh->prepare("update $table set start = 1
-                where phone like '$phone' and problem_class like 'problem_class' ");
-        $sth->execute();
+        $sth = $dbh->prepare("UPDATE $table SET 
+                start = 1,
+                worker=:worker
+                where phone like '$phone' and problem_class like '$problem_class' ");
+        $sth->execute(array(
+                ':worker' => $worker
+        ));
         $items = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){
                 array_push($items, $row);

@@ -1,17 +1,9 @@
 <?php
-session_start();
-$table = 't_app_repair';
-$id = $_POST['id'];
-$phone = $_POST['phone'];
-$problem_class = $_POST['problem_class'];
-$worker = $_POST['worker'];
+$table = 't_update_history';
 include '../conn.php';
 
 try{
-
-        $sth = $dbh->prepare("UPDATE $table SET
-                finish = 1
-                where id like '$id' ");
+        $sth = $dbh->prepare("select * from $table order by timestamp desc");
         $sth->execute();
         $items = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){
