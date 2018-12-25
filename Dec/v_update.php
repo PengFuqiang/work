@@ -4,11 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <link rel="stylesheet" type="text/css" href="../../css/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+<style type="text/css">
+    .line {
+        height: 400px;
+        width: 100%;
+    }
+</style>
 <script src="../../js/jquery.min.js"></script>
 <script src="../../js/jquery.easyui.min.js"></script>
 
 <script src="../../js/easyui-lang-zh_CN.js" charset="utf-8"></script>
 <script src="../../js/jquery.edatagrid.js"></script>
+<script src="../../js/echarts.js"></script>
 </head>
 
 <body style="font-size:12px">
@@ -41,7 +48,7 @@
            </tr>
         </table>
 
-
+<div style="width:100%;heigth:100%;background: #eee;" id = "box" class = "line"></div>
 
 <div style="width:100%;heigth:100%;background: #eee;">
         <table id="table_01" style="width:100%;heigth:100%;"
@@ -82,9 +89,126 @@
 
 <script type="text/javascript">
         $(document).ready(function () {
+                getLineChart();
                 mygrid01();
               
         })
+
+        function getLineChart() {
+            $.ajax({
+                url: "worker_app_room_status.php",
+                type: "GET",
+                dataType: "JSON",
+                success: function(data) {
+                    var data_length = getJsonObjLength(data);
+                    var on_temp_list = new Array();
+                    var off_temp_list = new Array();
+                    var timestamp_list = new Array();
+                    for (var i = 0; i < data_length; i++) {
+                        on_temp_list.push(parseFloat(data[i].room_on_temp).toFixed(1));
+                        off_temp_list.push(parseFloat(data[i].room_off_temp).toFixed(1));
+                        timestamp_list.push(data[i].timestamp);
+                    }
+                    var data_x = new Array();
+                    var data1 = new Array();
+                    var data2 = new Array();
+                    if (data_length < 12) {
+                        for (var i = data_length-1; i >= 0; i--) {
+                            var hour_minute = changeTime(timestamp_list[i]);
+                            data_x.push(hour_minute);
+                            data1.push(on_temp_list[i]);
+                            data2.push(off_temp_list[i]);
+                        }
+                    } else {
+                        for (var i = 11; i >= 0; i--) {
+                            var hour_minute = changeTime(timestamp_list[i]);
+                            data_x.push(hour_minute);
+                            data1.push(on_temp_list[i]);
+                            data2.push(off_temp_list[i]);
+                        }
+                    }
+                    var myChart = echarts.init(document.getElementById("box"));
+                    var option = {
+                        title:  {
+                            text: '开关机室温',
+                            subtext: '数据来源：鸿图智控'
+                        },
+                    backgroundColor: '#FBFBFB',
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['开机','关机']
+                    },
+                    calculable: true,
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: data_x,
+                        boundaryGap: 0,
+                        axisLabel: {
+                            rotate:30,
+                            interval: 0
+                        },
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            name: '开机',
+                            type: 'line',
+                            data: data1,
+                            markLine:{
+                                symbol: "none",
+                                itemStyle: {
+                                normal: {
+                                lineStyle: {
+                                color: '#FA3934',
+                                },
+                                label: {
+                                formatter: '虚线:21度水平线',
+                                position: 'middle'
+                                }
+                            },
+                        },
+
+                        data: [
+                            {
+                            name: '21度水平线',
+                            yAxis: 21
+                            }
+                        ]
+                    }
+                },
+                {
+                name: '关机',
+                type: 'line',
+                data: data2
+              },
+
+              ]
+
+            };
+            myChart.setOption(option);
+            } 
+            });
+        }
+
+        function getJsonObjLength(jsonObj) {
+            var Length = 0;
+            for (var item in jsonObj) {
+                Length++;
+            }
+            return Length;
+        }
+
+        function changeTime(time) {
+            var date = new Date(time.replace(/-/g, '/'));
+            var format_time = new Date(date);
+            var hour_minute = format_time.getHours() + ':' + format_time.getMinutes();
+            return hour_minute;
+        }
         
         function mygrid01() {
                 $('#table_01').edatagrid({

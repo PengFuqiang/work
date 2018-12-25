@@ -3,7 +3,7 @@ $table = 't_room_status';
 include '../conn.php';
 
 try{
-        $sth = $dbh->prepare("select * from $table order by timestamp desc");
+        $sth = $dbh->prepare("select * from $table order by timestamp desc limit 0,12");
         $sth->execute();
         $items = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){
