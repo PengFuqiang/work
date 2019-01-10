@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -7,36 +8,37 @@
     margin: 0;
     padding: 0;
 }
+body {
+  background-image: url("../images/bgp.jpg");
+  background-position: center 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+}
 #wrap {
-    height: 85%;
+    height: 88%;
     width: 100%;
-    background-image: url(../image/bgp.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
     position: relative;
 }
 #head {
-    height: 100px;
+    height: 12%;
     width: 100%;
     background-color: #66CCCC;
     text-align: center;
     position: relative;
+    overflow: hidden;
 }
 #wrap .logGet {
-    height: 550px;
+    height: 560px;
     width: 368px;  
     position: absolute;
     background-color: #FFFFFF;
-    top: 10%;
+    top: 5%;
     right: 10%;
-}
-.logC a button {
-    width: 100%;
-    height: 45px;
-    background-color: #ee7700;
-    border: none;
-    color: white;
-    font-size: 16px;
 }
 .logGet .logD.logDtip .p1 {
     display: inline-block;
@@ -47,7 +49,7 @@
 #wrap .logGet .logD.logDtip {
     width: 86%;
     border-bottom: 1px solid #ee7700;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
     margin-top: 0px;
     margin-right: auto;
     margin-left: auto;
@@ -77,12 +79,42 @@
     margin-bottom: 0px;
     margin-left: auto;
 }
+.logC a button {
+    width: 100%;
+    height: 45px;
+    background-color: #ee7700;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
 .title {
     font-family: "宋体";
     color: #FFFFFF;
     font-size: 36px;
     height: 40px;
     padding-top: 30px;
+    padding-bottom: 30px;
+}
+a {
+    line-height: 30px;
+    font-size: 16px;
+}
+a:link {
+    text-decoration: none;
+}
+a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+.div_left {
+    float: left;
+    width: 200px;
+    line-height: 100px;
+}
+.main_page {
+    font-size: 30px;
+    font-family: "微软雅黑";
 }
 .register {
     font-size: 16px;
@@ -100,11 +132,25 @@
     float: left;
     text-align: left;
 }
+.span2 input {
+    background-color: #9ACD32; 
+    cursor: pointer;
+}
+.login {
+    font-size: 16px;
+    position: absolute;
+    right: 10%;
+    margin-top: 10px;
+}
 
 </style>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <div id="head">
+        <div class="div_left">
+            <a class="main_page" href="main_page.html">鸿图教育</a>
+        </div>
         <div class="title">用户注册</div>
     </div>
     <div class="wrap" id="wrap">
@@ -114,48 +160,107 @@
                 <p class="p1">注册</p>
             </div>
             <div class="lgD">
-                <img src="../image/user.jpg" width="20" height="20" alt=""/>
-                <input type="text" placeholder="用户名" />
+                <img src="../images/user.jpg" width="20" height="20" alt=""/>
+                <input type="text" id="username" placeholder="用户名" />
             </div>
             <div class="lgD">
-                <img src="../image/phone.jpg" width="20" height="20" alt=""/>
-                <input type="text" placeholder="输入手机号" />
+                <img src="../images/phone.jpg" width="20" height="20" alt=""/>
+                <input type="text" id="phone" placeholder="输入手机号" />
             </div>
             <div class="lgD">
-                <img src="../image/password.jpg" width="20" height="20" alt=""/>
-                <input type="text" placeholder="输入用户密码" />
+                <img src="../images/password.jpg" width="20" height="20" alt=""/>
+                <input type="password" id="password" placeholder="输入密码（字母或数字长度：6-16）" />
             </div>
             <div class="lgD">
-                <img src="../image/password.jpg" width="20" height="20" alt=""/>
-                <input type="text" placeholder="确认密码" />
+                <img src="../images/password.jpg" width="20" height="20" alt=""/>
+                <input type="password" id="check_pwd" placeholder="确认密码" />
             </div>
             <div class="lgD">
                 <span class="span1">
-                    <input type="text" style="text-indent: 0rem;" class="input1" name="">
+                    <input type="text" id="verify_code" style="text-indent: 0rem;" class="input1" placeholder="验证码">
                 </span>
                 <span class="span2">
-                    <input type="button" style="text-indent: 0rem;background-color: #9ACD32;" name="" value="获取验证码">
+                    <input type="button" style="text-indent: 0rem;" name="" value="获取验证码">
                 </span>
             </div>
             <div class="logC">
-                <a href="index.html" target="_self"><button>注册</button></a>
+                <a target="_self"><button onclick="registerClick()">注 册</button></a>
+            </div>
+            <div class="login">
+                <p>已有账号？<a href="login.html">去登录</a></p>
             </div>
         </div>
     </div>
 </body>
 <script type="text/javascript">
-    function loginClick() {
-        var name=document.login.username.value;
-        var pwd=document.login.password.value;
-        if(name==null||name.length==0){
+    function registerClick() {
+        var username = $.trim($("#username").val());
+        var phone = $.trim($("#phone").val());
+        var password = $.trim($("#password").val());
+        var check_pwd = $.trim($("#check_pwd").val());
+
+        if (username == null || username.length == 0) {
             alert("用户名不能为空！");
-            return;
+            return false;
+        } else if (username.length < 3 || username.length > 11) {
+            alert("用户名长度3-11！");
+            return false;
+        } else {
+            var username_mode = /^[0-9a-zA-Z|_]{3,11}$/;
+            if (!username_mode.test(username)) {
+                alert("用户名包含非法字符！");
+                return false; 
+            }
         }
-        if(pwd==null||pwd.length==0){
+
+        if (phone == '') {
+            alert("手机号不能为空！");
+            return false;
+        } else if (phone.length != 11) {
+            alert("请输入11位手机号码！");
+            return false;
+        } else {
+            var phone_mode = /^[1][3,4,5,7,8][0-9]{9}$/;
+            if (!phone_mode.test(phone)) {
+                alert("请输入有效手机号！");
+                return false;
+            }
+        }
+
+        if (password == '') {
             alert("密码不能为空！");
-            return;
+            return false;
+        } else if (password.length < 6 || password.length > 16) {
+            alert("密码长度为6-16位！");
+            return false;
+        } else {
+            var password_mode = /^[0-9a-zA-Z]{3,16}$/;
+            if (!password_mode.test(password)) {
+                alert("密码格式为数字或字母组合！");
+                return false;
+            }
         }
-        document.login.submit();
+
+        if (check_pwd == '') {
+            alert("密码不能为空！");
+            return false;
+        } else if (check_pwd != password) {
+            alert("密码不一致！");
+            return false;
+        }
+
+        var data = {
+            username: username,
+            password: password,
+            phone: phone
+        };
+        $.ajax({
+            type: "POST",
+            url: "register.php",
+            data: data,
+            dataType: 'json',
+        });
+
     }
 </script>
 </html>

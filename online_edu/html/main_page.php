@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['username'])){
+    header("Location:login.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -134,12 +142,12 @@
                 float: right;               
             }
             .div_left {
-            	float: left;
-            	width: 200px;
+                float: left;
+                width: 200px;
             }
             .div_right {
-            	float: right;
-            	width: 200px;
+                float: right;
+                width: 200px;
             }
             .copyright {
                 font-family: "宋体";
@@ -154,19 +162,19 @@
             }
 
             a {
-            	line-height: 90px;
-            	font-size: 16px;
+                line-height: 90px;
+                font-size: 16px;
             }
             a:link {
-            	text-decoration: none;
+                text-decoration: none;
             }
             a:hover {
-            	color: blue;
-            	text-decoration: underline;
+                color: blue;
+                text-decoration: underline;
             }
             .main_page {
-            	font-size: 30px;
-            	font-family: "微软雅黑";
+                font-size: 30px;
+                font-family: "微软雅黑";
             }
         </style>
         <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
@@ -175,12 +183,22 @@
          <div class="container">            
              <div class="box">
                 <div class="header">
-                	<div class="div_left">
-                		<a class="main_page" href="main_page.html">鸿图教育</a>
-                	</div>
-                	<div class="div_right">
-                		<a href="login.html" >登录发现更多</a>
-                	</div>
+                    <div class="div_left">
+                        <a class="main_page" href="online_education.html">鸿图教育</a>
+                    </div>
+                    <div class="div_right">
+                        <a href="" onclick="openMine()">我的中心</a>
+                        <a href="login.html" >
+                            <?php
+                            session_start();
+                            if (isset($_SESSION['username'])) {
+                                echo $_SESSION['username'];
+                            } else {
+                                echo "请先登录";
+                            }
+                            ?>
+                        </a> 
+                    </div>
                 </div>
                 <div class="content">
                          <div class="left"></div>
@@ -274,8 +292,9 @@
             })
     
         })
-        function openLogin() {
-            window.open('login.html');
+
+        function openMine() {
+            window.Location.href = "mine.php";
         }
     </script>
 </html>

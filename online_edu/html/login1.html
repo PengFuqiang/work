@@ -141,13 +141,22 @@ a:hover {
                 <p class="p1">登录</p>
             </div>
             <div class="lgD">
-                <img src="../images/phone.jpg" width="20" height="20" alt=""/>
-                <input type="text" id="phone" placeholder="输入登录手机号码" />
+                <form id = "login1" action="check_login.php" method="POST">
+                    <p>
+                        <img src="../images/phone.jpg" width="20" height="20" alt=""/>
+                        <input type="text" name="phone" id="phone" placeholder="输入登录手机号码">
+                    </p>
+                </form>
             </div>
             <div class="lgD">
-                <img src="../images/password.jpg" width="20" height="20" alt=""/>
-                <input type="password" id="password" autocomplete="new-password" placeholder="输入登录密码" />
+                <form id = "login2" action="check_login.php" method="POST">
+                    <p>
+                        <img src="../images/password.jpg" width="20" height="20" alt=""/>
+                        <input type="password" name="password" id="password" placeholder="输入登录密码">
+                    </p>
+                </form>
             </div>
+            
             <div class="logC">
                 <a target="_self"><button onclick="loginClick()">登 录</button></a>
             </div>
