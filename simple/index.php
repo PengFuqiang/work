@@ -12,19 +12,31 @@
 		<!--页面的头部：logo、导航..-->
 		<div id="header">
 			<div id="logo">
-				<a href="index.html"><img src="images/allimgs/logo1.png" alt=""></a>
+				<a href="index.php"><img src="images/allimgs/logo1.png" alt=""></a>
 			</div>
 			<div id="nav">
 				<ul>
-					<a href="index.html"><li>全部课程</li></a>
+					<a href="index.php"><li>全部课程</li></a>
 					<a href="denglu.html"><li>我的课程</li></a>
 					<a href="photo.html"><li>图书专栏</li></a>
 					<a href="app.html"><li>APP下载</li></a>
 				</ul>
 			</div>
 			<div id="denglu">
-				<a href="zhuce.html">注册</a>
-				<a href="denglu.html">登陆</a>
+					<?php
+                        session_start();
+                        if (isset($_SESSION['phone']) && !empty($_SESSION['phone'])) {
+                    ?>
+                    	<a href="">登陆成功</a>
+                    	<a href="tuichu.html">退出</a>
+                    <?php
+                    	} else {
+                    ?>
+                    	<a href="zhuce.php">注册</a>
+                    	<a href="denglu.php">登录</a>
+                    <?php
+                    	}
+                    ?>
 			</div>
 		</div>
 		<!--页面轮播部分：包括form表单、轮播图部分开始-->

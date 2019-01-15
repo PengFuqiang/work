@@ -39,7 +39,6 @@
 					<form id="form_login" action="login.php" method="post">
 						<input type="text" id="phone" placeholder="用户手机号码">
 						<input type="password" id="password" autocomplete="new-password" placeholder="用户密码">
-						<!-- <button class="denglu" type="button" onclick="beforeSubmit()">立即登录</button> -->
 						<input class="input_button" style="background: #ff6100;color:#fff;cursor: pointer;" type="submit" name="submit" value='立即登录' />
 						<p><a href="#">找回密码 > ></a></p>
 						<p><a href="zhuce.php">没有账号？点此注册</a></p>

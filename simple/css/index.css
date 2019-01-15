@@ -185,6 +185,7 @@ body{
 	display: inline;
 	float: right;
 	font-size: 12px;
+	-webkit-transform: scale(0.84);
 	color: #666;
 	margin-top: 12px;
 }

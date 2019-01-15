@@ -11,7 +11,7 @@ body{
 	background-image: url(../images/allimgs/guide_bg.jpg);
 }
 #header{
-	width: 1280px;
+	width: 100%;
 	background: #fff;
 	height: 80px;
 }
@@ -43,7 +43,7 @@ body{
 
 
 #footer{
-	width:1280px;
+	width:100%;
 	height:120px;
 	background: #333;
 
