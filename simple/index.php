@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head id="header" name="header">
-	<title>鸿图国际教育</title>
+	<title>加中国际教育</title>
 	<script src="js/index.js"></script>
 	<link rel="stylesheet" href="css/index.css">
 	<meta charset="utf-8">
@@ -19,7 +19,7 @@
 					<a href="index.php"><li>全部课程</li></a>
 					<a href="denglu.html"><li>我的课程</li></a>
 					<a href="photo.html"><li>图书专栏</li></a>
-					<a href="app.html"><li>APP下载</li></a>
+					<a href="app1.html"><li>APP下载</li></a>
 				</ul>
 			</div>
 			<div id="denglu">
@@ -27,8 +27,8 @@
                         session_start();
                         if (isset($_SESSION['phone']) && !empty($_SESSION['phone'])) {
                     ?>
-                    	<a href="">登陆成功</a>
-                    	<a href="tuichu.html">退出</a>
+                    	<a href="tuichu.php?action=logout">退出</a>
+                    	<a href="">欢迎你！</a>
                     <?php
                     	} else {
                     ?>

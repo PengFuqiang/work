@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>鸿图国际教育</title>
+	<title>加中国际教育</title>
 	<link rel="stylesheet" href="css/denglu.css">
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/denglu.js"></script>
@@ -14,11 +14,11 @@
 		<!--页面的头部：logo、导航..-->
 		<div id="header">
 			<div id="logo">
-				<a href="index.php"><img src="images/allimgs/logo.png" alt=""></a>
+				<a href="index.php"><img src="images/allimgs/logo1.png" alt=""></a>
 			</div>
 			<div id="nav">
 				<ul>
-					<a href="index.php"><li>全部直播课</li></a>
+					<a href="index.php"><li>全部课程</li></a>
 					<a href="my.html"><li>我的课程</li><a/>
 					<a href="photo.html"><li>图书专栏</li></a>
 					<a href="app.html"><li>APP下载</li></a>
@@ -26,7 +26,7 @@
 			</div>
 			<div id="denglu">
 				<a href="zhuce.php">注册</a>
-				<a href="denglu.php">登陆</a>
+				<a href="denglu.php">登录</a>
 			</div>
 		</div>
 		
@@ -34,11 +34,11 @@
 		<!--登陆页面表单部分开始-->
 		<div class="content_box">
 			<div class="box_shadow">
-				<h1 class="user">用户登陆</h1>
+				<h1 class="user">用户登录</h1>
 				<div class="form_div">
 					<form id="form_login" action="login.php" method="post">
-						<input type="text" id="phone" placeholder="用户手机号码">
-						<input type="password" id="password" autocomplete="new-password" placeholder="用户密码">
+						<input type="text" id="phone" name="phone" placeholder="用户手机号码">
+						<input type="password" value="" id="password" name="password" autocomplete="new-password" placeholder="用户密码">
 						<input class="input_button" style="background: #ff6100;color:#fff;cursor: pointer;" type="submit" name="submit" value='立即登录' />
 						<p><a href="#">找回密码 > ></a></p>
 						<p><a href="zhuce.php">没有账号？点此注册</a></p>
@@ -50,7 +50,7 @@
 		<!--页面底部开始-->
 		<div id="footer">
 			<div class="footer_one">
-				<img style="width:196px;height: 52px;margin:30px;" src="images/allimgs/footer_logo.png" alt="">
+				<img style="width:196px;height: 52px;margin:30px;" src="images/allimgs/logo1.png" alt="">
 			</div>
 			<div class="footer_two">
 				<p>我们只为教师    400-9678-006(9：00-18：00)</p>

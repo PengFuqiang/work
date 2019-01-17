@@ -1,10 +1,9 @@
 <?php
 session_start();
+include('conn.php');
 $table = "t_online_education_user";
 $phone = $_POST['phone'];
 $password = $_POST['password'];
-
-include('conn.php');
 
 //检测用户名及密码是否正确
 $sth = $dbh->prepare("SELECT * FROM $table WHERE phone = :phone AND password = :password LIMIT 1");
