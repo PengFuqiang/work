@@ -19,7 +19,7 @@
 					<a href="index.php"><li>全部课程</li></a>
 					<a href="denglu.html"><li>我的课程</li></a>
 					<a href="photo.html"><li>图书专栏</li></a>
-					<a href="app1.html"><li>APP下载</li></a>
+					<a href="app.html"><li>APP下载</li></a>
 				</ul>
 			</div>
 			<div id="denglu">
