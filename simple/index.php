@@ -17,18 +17,30 @@
 			<div id="nav">
 				<ul>
 					<a href="index.php"><li>全部课程</li></a>
-					<a href="denglu.html"><li>我的课程</li></a>
-					<a href="photo.html"><li>图书专栏</li></a>
-					<a href="app.html"><li>APP下载</li></a>
+					<?php
+						session_start();
+						if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+					?>
+						<a href="my.php"><li>我的课程</li></a>
+					<?php
+						} else {
+					?>
+						<a href="denglu.php"><li>我的课程</li></a>
+					<?php
+						}
+					?>
+					
+					<a href="photo.php"><li>图书专栏</li></a>
+					<a href="app.php"><li>APP下载</li></a>
 				</ul>
 			</div>
 			<div id="denglu">
 					<?php
                         session_start();
-                        if (isset($_SESSION['phone']) && !empty($_SESSION['phone'])) {
+                        if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                     ?>
                     	<a href="tuichu.php?action=logout">退出</a>
-                    	<a href="">欢迎你！</a>
+                    	<a href="">欢迎：<?php echo $_SESSION['username'];?></a>
                     <?php
                     	} else {
                     ?>
@@ -64,9 +76,9 @@
 			<!--轮播下面导航条开始-->
 			<div id="banner_nav">
 				<ul id="banner_ul">
-					<li style="background:#D42A3C;color:#FFF;"><a href="#" style="color:#FFF;">推荐</a></li>
+					<li style="background:#D42A3C;color:#FFF;"><a href="index.php" style="color:#FFF;">推荐</a></li>
 					<li><a href="#">免费</a></li>
-					<li><a href="#">全部</a></li>
+					<li><a href="all_course.php">全部</a></li>
 				</ul>
 			</div>
 			<!--轮播下面导航条结束-->
@@ -81,7 +93,7 @@
 					<ul id="alldiv_ul">
 						<li>
 							<div id="dingwei">
-								<a href="#"><img src="images/allimgs/1.jpg" alt=""></a>
+								<a href="app.php"><img src="images/allimgs/1.jpg" alt=""></a>
 								<div id="dingwei_child">限售1000本，已售800本。</div>
 							</div>
 							<p id="first_p">山东教师招聘笔试通关班五期</p>
@@ -94,7 +106,7 @@
 					<ul id="alldiv_ul">
 						<li>
 							<div id="dingwei">
-								<a href="#"><img src="images/allimgs/2.jpg" alt=""></a>
+								<a href="app.php"><img src="images/allimgs/2.jpg" alt=""></a>
 								<div id="dingwei_child">限售1000本，已售800本。</div>
 							</div>
 							<p id="first_p">山东教师招聘笔试通关班五期</p>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,14 +20,26 @@
 			<div id="nav">
 				<ul>
 					<a href="index.php"><li>全部课程</li></a>
-					<a href="my.html"><li>我的课程</li><a/>
-					<a href="photo.html"><li>图书专栏</li></a>
-					<a href="app.html"><li>APP下载</li></a>
+					<a href="my.php"><li>我的课程</li><a/>
+					<a href="photo.php"><li>图书专栏</li></a>
+					<a href="app.php"><li>APP下载</li></a>
 				</ul>
 			</div>
 			<div id="denglu">
-				<a href="zhuce.php">注册</a>
-				<a href="denglu.php">登录</a>
+				<?php
+                    session_start();
+                    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+                ?>
+                	<a href="tuichu.php?action=logout">退出</a>
+                	<a href="">欢迎：<?php echo $_SESSION['username'];?></a>
+                <?php
+                	} else {
+                ?>
+                	<a href="zhuce.php">注册</a>
+                	<a href="denglu.php">登录</a>
+                <?php
+                	}
+                ?>
 			</div>
 		</div>
 

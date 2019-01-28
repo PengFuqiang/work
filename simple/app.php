@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,18 +29,48 @@
             <div id="nav">
                 <ul>
                     <a href="index.php"><li>全部课程</li></a>
-                    <a href="my.html"><li>我的课程</li><a/>
-                    <a href="photo.html"><li>图书专栏</li></a>
-                    <a href="app.html"><li>APP下载</li></a>
+                    <a href="my.php"><li>我的课程</li><a/>
+                    <a href="photo.php"><li>图书专栏</li></a>
+                    <a href="app.php"><li>APP下载</li></a>
                 </ul>
             </div>
             <div id="denglu">
-                <a href="zhuce.php">注册</a>
-                <a href="denglu.php">登陆</a>
+                <?php
+                    session_start();
+                    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+                ?>
+                    <a href="tuichu.php?action=logout">退出</a>
+                    <a href="">欢迎：<?php echo $_SESSION['username'];?></a>
+                <?php
+                    } else {
+                ?>
+                    <a href="zhuce.php">注册</a>
+                    <a href="denglu.php">登录</a>
+                <?php
+                    }
+                ?>
             </div>
         </div>
 
         <!--页面主题部分开始-->
+        <div class="background-gradient">
+            <div class="container">
+                <div class="row">
+                    <ol class="breadcrumb">
+                        <li><a href="#">课程</a></li>
+                    </ol>
+                </div>
+                <div class="row">
+                    <div class="padding"><h4>MongoDB集群之分片技术应用</h4></div>
+                </div>
+                <div class="row row-nav-margin">
+                    <div class="col-xs-12 col-md-6">
+                        <a href="#" id="join_btn" class="pull-right button-self" onclick="join_study"></a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="banner">
             <div id="slider2" class="leftsecbanner">
             <div class="contentdiv">

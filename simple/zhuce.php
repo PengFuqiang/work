@@ -19,9 +19,9 @@
 			<div id="nav">
 				<ul>
 					<a href="index.php"><li>全部课程</li></a>
-					<a href="my.html"><li>我的课程</li><a/>
-					<a href="photo.html"><li>图书专栏</li></a>
-					<a href="app.html"><li>APP下载</li></a>
+					<a href="my.php"><li>我的课程</li><a/>
+					<a href="photo.php"><li>图书专栏</li></a>
+					<a href="app.php"><li>APP下载</li></a>
 				</ul>
 			</div>
 			<div id="denglu">
@@ -38,6 +38,7 @@
 				<div class="form_div">
 					<form id="form_register" action="register.php" method="post" >
 						<input type="text" id="phone" name="phone" placeholder="用户手机号码">
+						<input type="text" id="username" name="username" placeholder="用户名">
 						<input type="password" id="password" name="password" autocomplete="new-password" placeholder="密码(6-16位字母+数字)">
 						<input type="password" id="check_pwd" name="check_pwd" autocomplete="new-password" placeholder="确认密码">
 						<input class="input_button" style="background: #ff6100;color:#fff;cursor: pointer;" type="submit" name="submit" value='立即注册' />

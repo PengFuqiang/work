@@ -15,6 +15,7 @@ $result = $sth->fetch(PDO::FETCH_ASSOC);
 print_r($result);
 
 if($result){
+        $_SESSION['username']=$result['username'];
         $_SESSION['phone']=$result['phone'];
         header("Location:index.php");
         exit();
