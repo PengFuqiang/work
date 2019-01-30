@@ -61,11 +61,11 @@ session_start();
                     </ol>
                 </div>
                 <div class="row">
-                    <div class="padding"><h4>MongoDB集群之分片技术应用</h4></div>
+                    <div class="padding"><h4 id="course_name">山东教师招聘笔试通关班五期</h4></div>
                 </div>
                 <div class="row row-nav-margin">
                     <div class="col-xs-12 col-md-6">
-                        <a href="#" id="join_btn" class="pull-right button-self" onclick="join_study"></a>
+                        <a href="#" id="join_btn" class="pull-right button-self" "></a>
                         
                     </div>
                 </div>
@@ -533,4 +533,71 @@ session_start();
         <!--页面底部结束-->
     </div>
 </body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadStatus();
+    });
+
+    function loadStatus() {
+        var course_name = $("#course_name").html();
+        $.ajax({
+            type: 'get',
+            url: 'check_course.php',
+            dataType: 'json',
+            data: {
+                
+            },
+            success: function(data) {
+                if (data) {
+                    var data_length = getJsonObjLength(data);
+                    var name_list = new Array();
+                    for (var i = 0; i < data_length; i++) {
+                        name_list.push(data[i].course_name);
+                    }
+                    if (name_list.includes(course_name)) {
+                        $("#join_btn").text('已加入，点此取消');
+                        $("#join_btn").attr("onclick","cancle_study();");
+                    } else if (!name_list.includes(course_name)) {
+                        $("#join_btn").text('加入我的学习');
+                        $("#join_btn").attr("onclick","join_study();");
+                    }
+                } else {
+                    $("#join_btn").text('加入我的学习');
+                }
+            }
+        })
+    }
+    function cancle_study() {
+        var course_name = $("#course_name").html();
+        $.ajax({
+            type: 'post',
+            url: 'cancle_study.php',
+            dataType: 'json',
+            data: {
+                course_name: 'course_name'
+            },
+        })
+    }
+
+    function join_study() {
+        var course_name = $("#course_name").html();
+        $.ajax({
+            type: 'post',
+            url: 'join_study.php',
+            dataType: 'json',
+            data: {
+                
+            }
+        })
+    }
+
+    function getJsonObjLength(jsonObj) {
+       var Length = 0;
+        for (var item in jsonObj) {
+            Length++;
+        }
+        return Length;
+    }
+
+</script>
 </html>
