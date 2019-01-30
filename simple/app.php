@@ -541,11 +541,11 @@ session_start();
     function loadStatus() {
         var course_name = $("#course_name").html();
         $.ajax({
-            type: 'get',
+            type: 'GET',
             url: 'check_course.php',
             dataType: 'json',
             data: {
-                
+                course_name: 'course_name'
             },
             success: function(data) {
                 if (data) {
@@ -563,6 +563,7 @@ session_start();
                     }
                 } else {
                     $("#join_btn").text('加入我的学习');
+                    $("#join_btn").attr('href','denglu.php');
                 }
             }
         })
@@ -570,25 +571,30 @@ session_start();
     function cancle_study() {
         var course_name = $("#course_name").html();
         $.ajax({
-            type: 'post',
+            type: 'POST',
             url: 'cancle_study.php',
-            dataType: 'json',
             data: {
-                course_name: 'course_name'
+                "course_name": course_name
             },
-        })
+        });
+        loadStatus();
     }
 
     function join_study() {
         var course_name = $("#course_name").html();
         $.ajax({
-            type: 'post',
-            url: 'join_study.php',
-            dataType: 'json',
+            url: "get_courseByName.php",
+            type: "POST",
             data: {
-                
-            }
-        })
+                "course_name": course_name
+            },
+            success: function(data) {//ajax请求成功后触发的方法
+        },
+        error: function(msg) {//ajax请求失败后触发的方法
+            alert(msg); //弹出错误信息
+        }
+        });
+        loadStatus();
     }
 
     function getJsonObjLength(jsonObj) {
