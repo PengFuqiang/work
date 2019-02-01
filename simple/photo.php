@@ -20,7 +20,18 @@ session_start();
 			<div id="nav">
 				<ul>
 					<a href="index.php"><li>全部课程</li></a>
-					<a href="my.php"><li>我的课程</li><a/>
+					<?php
+						session_start();
+						if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+					?>
+						<a href="my.php"><li>我的课程</li></a>
+					<?php
+						} else {
+					?>
+						<a href="denglu.php"><li>我的课程</li></a>
+					<?php
+						}
+					?>
 					<a href="photo.php"><li>图书专栏</li></a>
 					<a href="app.php"><li>APP下载</li></a>
 				</ul>

@@ -29,7 +29,18 @@ session_start();
             <div id="nav">
                 <ul>
                     <a href="index.php"><li>全部课程</li></a>
-                    <a href="my.php"><li>我的课程</li><a/>
+                    <?php
+                        session_start();
+                        if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+                    ?>
+                        <a href="my.php"><li>我的课程</li></a>
+                    <?php
+                        } else {
+                    ?>
+                        <a href="denglu.php"><li>我的课程</li></a>
+                    <?php
+                        }
+                    ?>
                     <a href="photo.php"><li>图书专栏</li></a>
                     <a href="app.php"><li>APP下载</li></a>
                 </ul>
@@ -557,14 +568,14 @@ session_start();
                     if (name_list.includes(course_name)) {
                         $("#join_btn").text('已加入，点此取消');
                         $("#join_btn").attr("onclick","cancle_study();");
-                    } else if (!name_list.includes(course_name)) {
+                    } else if (!name_list.includes(course_name) && !name_list) {
                         $("#join_btn").text('加入我的学习');
                         $("#join_btn").attr("onclick","join_study();");
+                    } else {
+                        $("#join_btn").text('加入我的学习');
+                        $("#join_btn").attr("href","denglu.php");
                     }
-                } else {
-                    $("#join_btn").text('加入我的学习');
-                    $("#join_btn").attr('href','denglu.php');
-                }
+                } 
             }
         })
     }

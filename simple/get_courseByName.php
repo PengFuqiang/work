@@ -8,8 +8,8 @@ $course_name = '山东教师招聘笔试通关班五期';
 //$course_name = $_POST['course_name'];
 
 try{
-                $sth = $dbh->prepare("SELECT * FROM $table WHERE course_name = '$course_name' ");
-                $sth->execute(array(
+        $sth = $dbh->prepare("SELECT * FROM $table WHERE course_name = '$course_name' ");
+        $sth->execute(array(
         ));
         $items = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){
@@ -21,15 +21,15 @@ try{
         $course_name = $result[0]['course_name'];
         echo($course_id);
         if ($result != null) {
-                $sth = $dbh->prepare("INSERT INTO $table_my SET
-                        phone = :phone,
-                                course_id = :course_id,
-                                course_name = :course_name
+            $sth = $dbh->prepare("INSERT INTO $table_my SET
+                       	phone = :phone,
+                        course_id = :course_id,
+                        course_name = :course_name
                         ");
                 $sth->execute(array(
-                                ':phone' => $phone,
-                                ':course_id' => $course_id,
-                				':course_name' => $course_name
+                        ':phone' => $phone,
+                        ':course_id' => $course_id,
+                		':course_name' => $course_name
         ));
         }
 }catch(PDOEXception $e){
