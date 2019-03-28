@@ -21,7 +21,7 @@
 					<a href="index.php"><li>全部课程</li></a>
 					<a href="#"><li>我的课程</li><a/>
 					<a href="photo.php"><li>图书专栏</li></a>
-					<a href="app.php"><li>APP下载</li></a>
+					<a href="app.php"><li>课程详情</li></a>
 				</ul>
 			</div>
 			<div id="denglu">
@@ -40,7 +40,7 @@
 						<input type="text" id="phone" name="phone" placeholder="用户手机号码">
 						<input type="password" value="" id="password" name="password" autocomplete="new-password" placeholder="用户密码">
 						<input class="input_button" style="background: #ff6100;color:#fff;cursor: pointer;" type="submit" name="submit" value='立即登录' />
-						<p><a href="#">找回密码 > ></a></p>
+						<p><a href="denglu_admin.php">管理员登录 > ></a></p>
 						<p><a href="zhuce.php">没有账号？点此注册</a></p>
 					</form>
 				</div>

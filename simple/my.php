@@ -31,7 +31,7 @@
 						}
 					?>
 					<a href="photo.php"><li>图书专栏</li></a>
-					<a href="app.php"><li>APP下载</li></a>
+					<a href="app.php"><li>课程详情</li></a>
 				</ul>
 			</div>
 			<div id="denglu">

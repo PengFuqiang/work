@@ -5,7 +5,7 @@
 	<title>加中国际教育</title>
 	<link rel="stylesheet" href="css/denglu.css">
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/register.js"></script>
+	<script src="js/denglu.js"></script>
 	
 </head>
 <body>
@@ -34,14 +34,13 @@
 		<!--登陆页面表单部分开始-->
 		<div class="content_box">
 			<div class="box_shadow">
-				<h1 class="user">用户注册</h1>
+				<h1 class="user">用户登录</h1>
 				<div class="form_div">
-					<form id="form_register" action="register.php" method="post" >
+					<form id="form_login" action="login_admin.php" method="post">
 						<input type="text" id="phone" name="phone" placeholder="用户手机号码">
-						<input type="text" id="username" name="username" placeholder="用户名">
-						<input type="password" id="password" name="password" autocomplete="new-password" placeholder="密码(6-16位字母+数字)">
-						<input type="password" id="check_pwd" name="check_pwd" autocomplete="new-password" placeholder="确认密码">
-						<input class="input_button" style="background: #ff6100;color:#fff;cursor: pointer;" type="submit" name="submit" value='立即注册' />
+						<input type="password" value="" id="password" name="password" autocomplete="new-password" placeholder="用户密码">
+						<input class="input_button" style="background: #ff6100;color:#fff;cursor: pointer;" type="submit" name="submit" value='立即登录' />
+						<p><a href="zhuce.php">没有账号？点此注册</a></p>
 					</form>
 				</div>
 			</div>
